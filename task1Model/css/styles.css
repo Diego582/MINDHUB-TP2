@@ -1,0 +1,31 @@
+.navbar {
+}
+
+.navbar img {
+  height: 50px;
+}
+
+.nav-link {
+  background-color: #d90368ff;
+  color: white;
+  width: 135px;
+  font-size: 14px;
+  border-radius: 5%;
+  -webkit-border-radius: 5%;
+  -moz-border-radius: 5%;
+  -ms-border-radius: 5%;
+  -o-border-radius: 5%;
+}
+
+.carousel {
+  background-color: #733150ff;
+  height: 100px;
+}
+
+main {
+  background-color: #a69616ff;
+}
+
+footer{
+  
+}
