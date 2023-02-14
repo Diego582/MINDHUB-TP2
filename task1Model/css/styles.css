@@ -40,12 +40,12 @@ footer {
   position: relative;
   color: white;
   order: 5;
-  width: 100%;
   justify-content: center;
   align-content: center;
   z-index: 1;
   padding-top: 20px;
-  height: 100px;
+  min-height: 15vh;
+  width: 100vw;
 }
 
 footer::after {
@@ -147,7 +147,6 @@ footer a {
   margin-right: 0;
 }
 
-html,
 body {
   height: 100vh;
   display: flex;
@@ -155,7 +154,7 @@ body {
 }
 
 header {
-  min-height: 25%;
+  min-height: 30vh;
   width: 100vw;
 }
 
@@ -164,15 +163,9 @@ header {
 }
 
 main {
-  min-height: 40%;
+  min-height: 50vh;
   width: 100vw;
   height: auto;
-}
-
-footer {
-  min-height: 150px;
-  width: 100vw;
-  bottom: 0;
 }
 
 .textDetails {
@@ -208,6 +201,10 @@ table td {
 
 .formContact {
   width: 50vw;
+}
+
+.Cohort {
+  margin-right: 20px;
 }
 
 @media only screen and (max-width: 375px) and (min-width: 319px) {
