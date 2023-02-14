@@ -89,7 +89,9 @@ footer a {
 }
 
 .cards img {
-  width: 18rem;
+  object-fit: cover;
+  height: 8rem;
+  width: 17rem;
 }
 
 .cardDetails {
@@ -148,7 +150,7 @@ body {
 
 header {
   min-height: 25%;
-  width: 100%;
+  width: 100vw;
 }
 
 .headerDetails {
@@ -157,13 +159,13 @@ header {
 
 main {
   min-height: 40%;
-  width: 100%;
+  width: 100vw;
   height: auto;
 }
 
 footer {
   min-height: 150px;
-  width: 100%;
+  width: 100vw;
   bottom: 0;
 }
 
@@ -185,6 +187,21 @@ table td {
 .busqueda {
   width: 300px;
   margin: 10px 15px;
+}
+
+.btnContact {
+  background-color: #a69616ff;
+  color: white;
+  width: 10vw;
+}
+
+.btnContact:hover {
+  background-color: #733150ff;
+  color: white;
+}
+
+.formContact {
+  width: 50vw;
 }
 
 @media only screen and (max-width: 375px) and (min-width: 319px) {
@@ -211,12 +228,28 @@ table td {
     justify-content: center;
   }
 
-  header {
-    width: 320px;
+  .formContact {
+    width: 75vw;
   }
 
-  main {
-    width: 320px;
+  .btnContact {
+    width: 50vw;
+  }
+
+  .cardDetails {
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin: 0;
+  }
+
+  .imgDetails {
+    width: 100vw;
+  }
+
+  .cardTextDetails {
+    width: 100vw;
+    margin: 10px 0px;
+    font-size: medium;
   }
 }
 
@@ -240,6 +273,30 @@ table td {
     width: 100%;
     display: flex;
     justify-content: center;
+  }
+
+  .formContact {
+    width: 75vw;
+  }
+
+  .btnContact {
+    width: 50vw;
+  }
+
+  .cardDetails {
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin: 0;
+  }
+
+  .imgDetails {
+    width: 100vw;
+  }
+
+  .cardTextDetails {
+    width: 100vw;
+    margin: 10px 0px;
+    font-size: medium;
   }
 }
 
@@ -267,5 +324,12 @@ table td {
 
   .busqueda {
     width: 100%;
+  }
+  .formContact {
+    width: 75vw;
+  }
+
+  .btnContact {
+    width: 50vw;
   }
 }
