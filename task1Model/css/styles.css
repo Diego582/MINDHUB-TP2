@@ -20,6 +20,12 @@
   -o-border-radius: 5%;
 }
 
+.navbar-nav .nav-link.active {
+  color: white;
+  text-shadow: 1px 1px black;
+  background-color: #a69616ff;
+}
+
 .carousel {
   background-color: #733150ff;
   height: 150px;
