@@ -100,6 +100,34 @@ footer a {
   width: 17rem;
 }
 
+#cardsHome {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+#cardsHome > .card {
+  margin: 10px;
+  width: 17rem;
+}
+
+#categoriesHome {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+#categoriesHome > .form-check {
+  margin: 5px 15px;
+  padding-left: 0;
+  width: 9rem;
+}
+
+#categoriesHome label {
+  display: flex;
+  align-items: center;
+}
+
 .cardDetails {
   width: 90vw;
   min-height: 75vh;
@@ -205,6 +233,31 @@ table td {
 
 .Cohort {
   margin-right: 20px;
+}
+
+.check {
+  appearance: none;
+  cursor: pointer;
+  background-color: #733150ff;
+  border-radius: 5%;
+  width: 20px;
+  height: 20px;
+  margin: 5px;
+  transition: background-color ease-in-out 0.3s;
+  -webkit-transition: background-color ease-in-out 0.3s;
+  -moz-transition: background-color ease-in-out 0.3s;
+  -ms-transition: background-color ease-in-out 0.3s;
+  -o-transition: background-color ease-in-out 0.3s;
+  -webkit-border-radius: 5%;
+  -moz-border-radius: 5%;
+  -ms-border-radius: 5%;
+  -o-border-radius: 5%;
+}
+
+.check:checked {
+  background-image: url("../images/marcaVerif1.png");
+  background-position: center;
+  background-color: #733150ff;
 }
 
 @media only screen and (max-width: 375px) and (min-width: 319px) {
