@@ -194,16 +194,18 @@ categories = [
 
 let i = 0;
 for (i = 0; i < data.events.length; i++) {
-  document.getElementById("cardsHome").innerHTML +=
-    "<div class='card'><img src='" +
-    data.events[i].image +
-    " class='card-img-top' alt='...'><div class='card-body d-flex flex-column align-items-center justify-content-between'><h5 class='card-title'>" +
-    data.events[i].name +
-    "</h5><p class='card-text'>" +
-    data.events[i].description +
-    "</p><div class='d-flex justify-content-between w-100 align-content-center'><p class='card-text'>Price $" +
-    data.events[i].price +
-    "</p><a href='./details.html' class='btn btnHome'>Ver mas</a></div></div></div>";
+  if (data.events[i].date <= "2021-12-31") {
+    document.getElementById("cardsPast").innerHTML +=
+      "<div class='card'><img src='" +
+      data.events[i].image +
+      " class='card-img-top' alt='...'><div class='card-body d-flex flex-column align-items-center justify-content-between'><h5 class='card-title'>" +
+      data.events[i].name +
+      "</h5><p class='card-text'>" +
+      data.events[i].description +
+      "</p><div class='d-flex justify-content-between w-100 align-content-center'><p class='card-text'>Price $" +
+      data.events[i].price +
+      "</p><a href='./details.html' class='btn btnHome'>Ver mas</a></div></div></div>";
+  }
 }
 
 for (let i = 0; i < categories.length; i++) {
@@ -214,13 +216,3 @@ for (let i = 0; i < categories.length; i++) {
     categories[i] +
     "</span> </label> </div>";
 }
-
-const checkbox = document.getElementById("categoriesHome");
-let categoriesSelected = [];
-checkbox.addEventListener("change", (event) => {
-
-  console.log("checked", event.target.value);
-  
-  categoriesSelected.push(event.target.value);
-  console.log("checked acumulados", categoriesSelected);
-});

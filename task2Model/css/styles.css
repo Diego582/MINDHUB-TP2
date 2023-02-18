@@ -111,6 +111,28 @@ footer a {
   width: 17rem;
 }
 
+#cardsUpcoming {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+#cardsUpcoming > .card {
+  margin: 10px;
+  width: 17rem;
+}
+
+#cardsPast {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+#cardsPast > .card {
+  margin: 10px;
+  width: 17rem;
+}
+
 #categoriesHome {
   display: flex;
   flex-wrap: wrap;
@@ -211,6 +233,10 @@ table td {
   margin: 10px 0px;
 }
 
+.card p {
+  text-align: justify;
+}
+
 .busqueda {
   width: 300px;
   margin: 10px 15px;
@@ -257,7 +283,7 @@ table td {
 .check:checked {
   background-image: url("../images/marcaVerif1.png");
   background-position: center;
-  background-color: #733150ff;
+  background-color: #a69616ff;
 }
 
 @media only screen and (max-width: 375px) and (min-width: 319px) {

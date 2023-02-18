@@ -181,46 +181,48 @@ var data = {
   ],
 };
 
-categories = [
-  "Food Fair",
-  "Museum",
-  "Costume Party",
-  "Music Concert",
-  "Soccer field",
-  "Race",
-  "Book Exchange",
-  "Cinema",
-];
-
 let i = 0;
-for (i = 0; i < data.events.length; i++) {
-  document.getElementById("cardsHome").innerHTML +=
-    "<div class='card'><img src='" +
+for (i = 0; i < 1; i++) {
+  console.log("ingresa al for");
+  document.getElementById("cardDetails").innerHTML +=
+    "<div class= 'bg-white col-5 d-flex justify-space-center align-items-center flex-grow-1 imgDetails'>" +
+    "<img src=" +
     data.events[i].image +
-    " class='card-img-top' alt='...'><div class='card-body d-flex flex-column align-items-center justify-content-between'><h5 class='card-title'>" +
+    " class='card-img object-fit-contain border rounded' alt='...'></div><div class='col-1'></div>" +
+    "<div class=' bg-white col-5 row align-items-center text-center flex-grow-1 cardTextDetails '>" +
+    "<h5 class='card-title fs-1'>" +
     data.events[i].name +
-    "</h5><p class='card-text'>" +
+    "</h5>" +
+    "<div class='d-flex justify-content-around'><p class='card-text fs-5'>Category: " +
+    data.events[i].category +
+    "</p>" +
+    "<p class='card-text fs-5'>Date: " +
+    data.events[i].date +
+    "</p></div>" +
+    "<div><p class='card-text textDetails'>" +
     data.events[i].description +
-    "</p><div class='d-flex justify-content-between w-100 align-content-center'><p class='card-text'>Price $" +
+    "</p> <p class='card-text fs-3'>Price $" +
     data.events[i].price +
-    "</p><a href='./details.html' class='btn btnHome'>Ver mas</a></div></div></div>";
+    "</p></div>" +
+    "<div class='d-flex justify-content-around'><p class='card-text fs-5'>Capacity: " +
+    data.events[i].capacity +
+    "</p>" +
+    "<p class='card-text fs-5'>Assitance: " +
+    data.events[i].assistance +
+    "</p></div>" +
+    "</div>";
 }
 
-for (let i = 0; i < categories.length; i++) {
-  document.getElementById("categoriesHome").innerHTML +=
-    "<div class='form-check'><label><input class='check' type='checkbox' name='catSel' value='" +
-    categories[i] +
-    "'> <span>" +
-    categories[i] +
-    "</span> </label> </div>";
-}
+/* 
 
-const checkbox = document.getElementById("categoriesHome");
-let categoriesSelected = [];
-checkbox.addEventListener("change", (event) => {
 
-  console.log("checked", event.target.value);
+
+
+
   
-  categoriesSelected.push(event.target.value);
-  console.log("checked acumulados", categoriesSelected);
-});
+
+     $0000
+
+
+
+ */
