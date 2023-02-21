@@ -181,20 +181,11 @@ var data = {
   ],
 };
 
-categories = [
-  "Food Fair",
-  "Museum",
-  "Costume Party",
-  "Music Concert",
-  "Soccer field",
-  "Race",
-  "Book Exchange",
-  "Cinema",
-];
+categories = [];
 
 let i = 0;
 for (i = 0; i < data.events.length; i++) {
-  if (data.events[i].date >= "2021-12-31") {
+  if (data.events[i].date >= data.currentDate) {
     document.getElementById("cardsUpcoming").innerHTML +=
       "<div class='card'><img src='" +
       data.events[i].image +
@@ -205,14 +196,19 @@ for (i = 0; i < data.events.length; i++) {
       "</p><div class='d-flex justify-content-between w-100 align-content-center'><p class='card-text'>Price $" +
       data.events[i].price +
       "</p><a href='./details.html' class='btn btnHome'>Ver mas</a></div></div></div>";
+
+    if (!categories.includes(data.events[i].category)) {
+      categories.push(data.events[i].category);
+    }
   }
 }
 
-for (let i = 0; i < categories.length; i++) {
+for (let j = 0; j < categories.length; j++) {
   document.getElementById("categoriesHome").innerHTML +=
     "<div class='form-check'><label><input class='check' type='checkbox' name='catSel' value='" +
-    categories[i] +
+    categories[j] +
     "'> <span>" +
-    categories[i] +
+    categories[j] +
     "</span> </label> </div>";
 }
+

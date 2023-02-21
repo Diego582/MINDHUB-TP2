@@ -181,16 +181,7 @@ var data = {
   ],
 };
 
-categories = [
-  "Food Fair",
-  "Museum",
-  "Costume Party",
-  "Music Concert",
-  "Soccer field",
-  "Race",
-  "Book Exchange",
-  "Cinema",
-];
+categories = [];
 
 let i = 0;
 for (i = 0; i < data.events.length; i++) {
@@ -203,7 +194,12 @@ for (i = 0; i < data.events.length; i++) {
     data.events[i].description +
     "</p><div class='d-flex justify-content-between w-100 align-content-center'><p class='card-text'>Price $" +
     data.events[i].price +
-    "</p><a href='./details.html' class='btn btnHome'>Ver mas</a></div></div></div>";
+    "</p><a href='./details.html' value='" +
+    data.events[i]._id +
+    "' class='btn btnHome'>Ver mas</a></div></div></div>";
+  if (!categories.includes(data.events[i].category)) {
+    categories.push(data.events[i].category);
+  }
 }
 
 for (let i = 0; i < categories.length; i++) {
@@ -217,10 +213,24 @@ for (let i = 0; i < categories.length; i++) {
 
 const checkbox = document.getElementById("categoriesHome");
 let categoriesSelected = [];
-checkbox.addEventListener("change", (event) => {
 
+checkbox.addEventListener("change", (event) => {
   console.log("checked", event.target.value);
-  
-  categoriesSelected.push(event.target.value);
+  if (!categoriesSelected.includes(event.target.value)) {
+    categoriesSelected.push(event.target.value);
+  } else {
+    categoriesSelected.splice(
+      categoriesSelected.indexOf(event.target.value),
+      1
+    );
+  }
   console.log("checked acumulados", categoriesSelected);
+
+  if (categoriesSelected) {
+    const result = data.events.filter(
+      (data) => data.category == categoriesSelected
+    );
+
+    console.log("esto es result", result);
+  }
 });
