@@ -181,34 +181,97 @@ var data = {
   ],
 };
 
-categories = [];
-
-let i = 0;
-for (i = 0; i < data.events.length; i++) {
-  if (data.events[i].date >= data.currentDate) {
+// se encarga de dibujar los cards en el html
+const dibujarCards = (array) => {
+  for (item of array) {
     document.getElementById("cardsUpcoming").innerHTML +=
       "<div class='card'><img src='" +
-      data.events[i].image +
+      item.image +
       " class='card-img-top' alt='...'><div class='card-body d-flex flex-column align-items-center justify-content-between'><h5 class='card-title'>" +
-      data.events[i].name +
+      item.name +
       "</h5><p class='card-text'>" +
-      data.events[i].description +
+      item.description +
       "</p><div class='d-flex justify-content-between w-100 align-content-center'><p class='card-text'>Price $" +
-      data.events[i].price +
+      item.price +
       "</p><a href='./details.html' class='btn btnHome'>Ver mas</a></div></div></div>";
+  }
+};
 
-    if (!categories.includes(data.events[i].category)) {
-      categories.push(data.events[i].category);
+// se encarga de llamar al dibujo de cards y a su vez extrae los valores de las categorias
+const dibujarCardsInicial = (array) => {
+  dibujarCards(array);
+  // extraer categorias para dibujar
+  for (item of array) {
+    if (!categories.includes(item.category)) {
+      categories.push(item.category);
     }
   }
-}
+};
 
-for (let j = 0; j < categories.length; j++) {
-  document.getElementById("categoriesHome").innerHTML +=
-    "<div class='form-check'><label><input class='check' type='checkbox' name='catSel' value='" +
-    categories[j] +
-    "'> <span>" +
-    categories[j] +
-    "</span> </label> </div>";
-}
+const dibujarCat = (array) => {
+  for (cat of array) {
+    document.getElementById("categoriesHome").innerHTML +=
+      "<div class='form-check'><label><input class='check' type='checkbox' name='catSel' value='" +
+      cat +
+      "'> <span>" +
+      cat +
+      "</span> </label> </div>";
+  }
+};
 
+// se hace una copia del array filtrando los events
+let cardSeleccionadas = data.events.filter(
+  (event) => event.date > data.currentDate
+);
+
+
+let categories = [];
+let cardsFiltradas = [];
+
+// se dibuja inicialmente
+
+dibujarCardsInicial(cardSeleccionadas);
+
+// se dibuja las categorias que se filtraron de la data
+dibujarCat(categories);
+
+// escucho el event en CategoriesHome y reacciona en base a la info
+const checkbox = document.getElementById("categoriesHome");
+let categoriesSelected = [];
+
+checkbox.addEventListener("change", (event) => {
+  // en cada vuelta vaciar el arreglo cards filtrada
+  cardsFiltradas = [];
+  // se condiciona el ingreso si no esta agrega el valor de categorias
+
+  if (!categoriesSelected.includes(event.target.value)) {
+    categoriesSelected.push(event.target.value);
+  } else {
+    // se condiciona el ingreso si ya esta se busca y se borra
+    categoriesSelected.splice(
+      categoriesSelected.indexOf(event.target.value),
+      1
+    );
+  }
+
+  // si no hay categoriesSelectd redibujar completo
+  if (!categoriesSelected.length) {
+    //vaciar html antes de dibujar
+    document.getElementById("cardsUpcoming").innerHTML = "";
+    dibujarCards(cardSeleccionadas);
+  }
+
+  // si hay categoriesSelected hay filtro
+  if (categoriesSelected.length) {
+    // se realiza un foreach y se analiza cada instancia si es una categoria filtrada
+    cardSeleccionadas.forEach((element) => {
+      if (categoriesSelected.includes(element.category)) {
+        cardsFiltradas.push(element);
+      }
+    });
+    //se vacia el innerHTML
+    document.getElementById("cardsUpcoming").innerHTML = "";
+    // se dibuja nuevamente pero solo con las cards filtradas
+    dibujarCards(cardsFiltradas);
+  }
+});

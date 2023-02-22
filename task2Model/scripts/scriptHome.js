@@ -181,42 +181,62 @@ var data = {
   ],
 };
 
+// se encarga de dibujar los cards en el html
+const dibujarCards = (array) => {
+  for (item of array) {
+    document.getElementById("cardsHome").innerHTML +=
+      "<div class='card'><img src='" +
+      item.image +
+      " class='card-img-top' alt='...'><div class='card-body d-flex flex-column align-items-center justify-content-between'><h5 class='card-title'>" +
+      item.name +
+      "</h5><p class='card-text'>" +
+      item.description +
+      "</p><div class='d-flex justify-content-between w-100 align-content-center'><p class='card-text'>Price $" +
+      item.price +
+      "</p><a href='./details.html' class='btn btnHome'>Ver mas</a></div></div></div>";
+  }
+};
+
+// se encarga de llamar al dibujo de cards y a su vez extrae los valores de las categorias
+const dibujarCardsInicial = (array) => {
+  dibujarCards(array);
+  // extraer categorias para dibujar
+  for (item of array) {
+    if (!categories.includes(item.category)) {
+      categories.push(item.category);
+    }
+  }
+};
+
+const dibujarCat = (array) => {
+  for (cat of array) {
+    document.getElementById("categoriesHome").innerHTML +=
+      "<div class='form-check'><label><input class='check' type='checkbox' name='catSel' value='" +
+      cat +
+      "'> <span>" +
+      cat +
+      "</span> </label> </div>";
+  }
+};
+
+// se hace una copia inmutable del  array
 let cardSeleccionadas = [].concat(data.events);
 let categories = [];
+let cardsFiltradas = [];
 
-let i = 0;
-for (i = 0; i < cardSeleccionadas.length; i++) {
-  document.getElementById("cardsHome").innerHTML +=
-    "<div class='card'><img src='" +
-    cardSeleccionadas[i].image +
-    " class='card-img-top' alt='...'><div class='card-body d-flex flex-column align-items-center justify-content-between'><h5 class='card-title'>" +
-    cardSeleccionadas[i].name +
-    "</h5><p class='card-text'>" +
-    cardSeleccionadas[i].description +
-    "</p><div class='d-flex justify-content-between w-100 align-content-center'><p class='card-text'>Price $" +
-    cardSeleccionadas[i].price +
-    "</p><a href='./details.html' value='" +
-    cardSeleccionadas[i]._id +
-    "' class='btn btnHome'>Ver mas</a></div></div></div>";
-  if (!categories.includes(cardSeleccionadas[i].category)) {
-    categories.push(cardSeleccionadas[i].category);
-  }
-}
+// se dibjua inicialmente las cards
+dibujarCardsInicial(cardSeleccionadas);
 
-for (let i = 0; i < categories.length; i++) {
-  document.getElementById("categoriesHome").innerHTML +=
-    "<div class='form-check'><label><input class='check' type='checkbox' name='catSel' value='" +
-    categories[i] +
-    "'> <span>" +
-    categories[i] +
-    "</span> </label> </div>";
-}
+// se dibuja las categorias que se filtraron de la data
+dibujarCat(categories);
 
 // escucho el event en CategoriesHome y reacciona en base a la info
 const checkbox = document.getElementById("categoriesHome");
 let categoriesSelected = [];
 
 checkbox.addEventListener("change", (event) => {
+  // en cada vuelta vaciar el arreglo cards filtrada
+  cardsFiltradas = [];
   // se condiciona el ingreso si no esta agrega el valor
 
   if (!categoriesSelected.includes(event.target.value)) {
@@ -230,57 +250,25 @@ checkbox.addEventListener("change", (event) => {
   }
 
   // si no hay categoriesSelectd redibujar completo
-  if (categoriesSelected.length == 0) {
-    cardSeleccionadas = [].concat(data.events);
-    for (i = 0; i < cardSeleccionadas.length; i++) {
-      document.getElementById("cardsHome").innerHTML +=
-        "<div class='card'><img src='" +
-        cardSeleccionadas[i].image +
-        " class='card-img-top' alt='...'><div class='card-body d-flex flex-column align-items-center justify-content-between'><h5 class='card-title'>" +
-        cardSeleccionadas[i].name +
-        "</h5><p class='card-text'>" +
-        cardSeleccionadas[i].description +
-        "</p><div class='d-flex justify-content-between w-100 align-content-center'><p class='card-text'>Price $" +
-        cardSeleccionadas[i].price +
-        "</p><a href='./details.html' value='" +
-        cardSeleccionadas[i]._id +
-        "' class='btn btnHome'>Ver mas</a></div></div></div>";
-    }
+  if (!categoriesSelected.length) {
+    //vaciar html antes de dibujar
+    document.getElementById("cardsHome").innerHTML = "";
+    dibujarCards(cardSeleccionadas);
   }
 
-  // si hat categoriesSelected hay filtro
-  if (categoriesSelected.length > 0) {
-    let consulta = "";
-    for (let k = 0; k < categoriesSelected.length; k++) {
-      if (!consulta) {
-        consulta = categoriesSelected[k];
-      }
-      consulta = consulta + " && " + categoriesSelected[k];
-    }
-    console.log("esto es consulta", consulta);
-    cardSeleccionadas = [];
-    console.log("esto es card Seleccionada en el filtro", cardSeleccionadas);
+  // si hay categoriesSelected hay filtro
+  if (categoriesSelected.length) {
     // se realiza un foreach y se analiza cada instancia si es una categoria filtrada
     data.events.forEach((element) => {
       if (categoriesSelected.includes(element.category)) {
-        cardSeleccionadas.push(element);
+        cardsFiltradas.push(element);
       }
     });
-
+    //se vacia el innerHTML
     document.getElementById("cardsHome").innerHTML = "";
-    for (i = 0; i < cardSeleccionadas.length; i++) {
-      document.getElementById("cardsHome").innerHTML +=
-        "<div class='card'><img src='" +
-        cardSeleccionadas[i].image +
-        " class='card-img-top' alt='...'><div class='card-body d-flex flex-column align-items-center justify-content-between'><h5 class='card-title'>" +
-        cardSeleccionadas[i].name +
-        "</h5><p class='card-text'>" +
-        cardSeleccionadas[i].description +
-        "</p><div class='d-flex justify-content-between w-100 align-content-center'><p class='card-text'>Price $" +
-        cardSeleccionadas[i].price +
-        "</p><a href='./details.html' value='" +
-        cardSeleccionadas[i]._id +
-        "' class='btn btnHome'>Ver mas</a></div></div></div>";
-    }
+
+    // se dibuja nuevamente pero solo con las cards filtradas
+
+    dibujarCards(cardsFiltradas);
   }
 });
