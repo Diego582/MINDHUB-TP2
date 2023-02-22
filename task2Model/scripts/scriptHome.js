@@ -181,24 +181,25 @@ var data = {
   ],
 };
 
-categories = [];
+let cardSeleccionadas = [].concat(data.events);
+let categories = [];
 
 let i = 0;
-for (i = 0; i < data.events.length; i++) {
+for (i = 0; i < cardSeleccionadas.length; i++) {
   document.getElementById("cardsHome").innerHTML +=
     "<div class='card'><img src='" +
-    data.events[i].image +
+    cardSeleccionadas[i].image +
     " class='card-img-top' alt='...'><div class='card-body d-flex flex-column align-items-center justify-content-between'><h5 class='card-title'>" +
-    data.events[i].name +
+    cardSeleccionadas[i].name +
     "</h5><p class='card-text'>" +
-    data.events[i].description +
+    cardSeleccionadas[i].description +
     "</p><div class='d-flex justify-content-between w-100 align-content-center'><p class='card-text'>Price $" +
-    data.events[i].price +
+    cardSeleccionadas[i].price +
     "</p><a href='./details.html' value='" +
-    data.events[i]._id +
+    cardSeleccionadas[i]._id +
     "' class='btn btnHome'>Ver mas</a></div></div></div>";
-  if (!categories.includes(data.events[i].category)) {
-    categories.push(data.events[i].category);
+  if (!categories.includes(cardSeleccionadas[i].category)) {
+    categories.push(cardSeleccionadas[i].category);
   }
 }
 
@@ -211,26 +212,75 @@ for (let i = 0; i < categories.length; i++) {
     "</span> </label> </div>";
 }
 
+// escucho el event en CategoriesHome y reacciona en base a la info
 const checkbox = document.getElementById("categoriesHome");
 let categoriesSelected = [];
 
 checkbox.addEventListener("change", (event) => {
-  console.log("checked", event.target.value);
+  // se condiciona el ingreso si no esta agrega el valor
+
   if (!categoriesSelected.includes(event.target.value)) {
     categoriesSelected.push(event.target.value);
   } else {
+    // se condiciona el ingreso si ya esta se busca y se borra
     categoriesSelected.splice(
       categoriesSelected.indexOf(event.target.value),
       1
     );
   }
-  console.log("checked acumulados", categoriesSelected);
 
-  if (categoriesSelected) {
-    const result = data.events.filter(
-      (data) => data.category == categoriesSelected
-    );
+  // si no hay categoriesSelectd redibujar completo
+  if (categoriesSelected.length == 0) {
+    cardSeleccionadas = [].concat(data.events);
+    for (i = 0; i < cardSeleccionadas.length; i++) {
+      document.getElementById("cardsHome").innerHTML +=
+        "<div class='card'><img src='" +
+        cardSeleccionadas[i].image +
+        " class='card-img-top' alt='...'><div class='card-body d-flex flex-column align-items-center justify-content-between'><h5 class='card-title'>" +
+        cardSeleccionadas[i].name +
+        "</h5><p class='card-text'>" +
+        cardSeleccionadas[i].description +
+        "</p><div class='d-flex justify-content-between w-100 align-content-center'><p class='card-text'>Price $" +
+        cardSeleccionadas[i].price +
+        "</p><a href='./details.html' value='" +
+        cardSeleccionadas[i]._id +
+        "' class='btn btnHome'>Ver mas</a></div></div></div>";
+    }
+  }
 
-    console.log("esto es result", result);
+  // si hat categoriesSelected hay filtro
+  if (categoriesSelected.length > 0) {
+    let consulta = "";
+    for (let k = 0; k < categoriesSelected.length; k++) {
+      if (!consulta) {
+        consulta = categoriesSelected[k];
+      }
+      consulta = consulta + " && " + categoriesSelected[k];
+    }
+    console.log("esto es consulta", consulta);
+    cardSeleccionadas = [];
+    console.log("esto es card Seleccionada en el filtro", cardSeleccionadas);
+    // se realiza un foreach y se analiza cada instancia si es una categoria filtrada
+    data.events.forEach((element) => {
+      if (categoriesSelected.includes(element.category)) {
+        cardSeleccionadas.push(element);
+      }
+    });
+
+    document.getElementById("cardsHome").innerHTML = "";
+    for (i = 0; i < cardSeleccionadas.length; i++) {
+      document.getElementById("cardsHome").innerHTML +=
+        "<div class='card'><img src='" +
+        cardSeleccionadas[i].image +
+        " class='card-img-top' alt='...'><div class='card-body d-flex flex-column align-items-center justify-content-between'><h5 class='card-title'>" +
+        cardSeleccionadas[i].name +
+        "</h5><p class='card-text'>" +
+        cardSeleccionadas[i].description +
+        "</p><div class='d-flex justify-content-between w-100 align-content-center'><p class='card-text'>Price $" +
+        cardSeleccionadas[i].price +
+        "</p><a href='./details.html' value='" +
+        cardSeleccionadas[i]._id +
+        "' class='btn btnHome'>Ver mas</a></div></div></div>";
+    }
   }
 });
