@@ -183,7 +183,49 @@ var data = {
 
 // se encarga de dibujar los cards en el html
 const dibujarCards = (array) => {
-  for (item of array) {
+  let listCards = document.getElementById("cardsHome");
+
+  let fragmento = document.createDocumentFragment();
+
+  for (let itemCard of array) {
+    let div = document.createElement("div");
+    div.className = "card";
+    let img = document.createElement("img");
+    img.src = itemCard.image;
+    img.className = "card-img-top";
+    img.alt = itemCard.name;
+    div.appendChild(img);
+    let div1 = document.createElement("div");
+    div1.className =
+      "card-body d-flex flex-column align-items-center justify-content-between";
+    let h5 = document.createElement("h5");
+    h5.className = "card-title";
+    h5.textContent = itemCard.name;
+    div1.appendChild(h5);
+    let p = document.createElement("p");
+    p.className = "card-text";
+    p.textContent = itemCard.description;
+    div1.appendChild(p);
+    let div2 = document.createElement("div");
+    div2.className =
+      "d-flex justify-content-between w-100 align-content-center";
+    let p2 = document.createElement("p");
+    p2.className = "card-text";
+    p2.textContent = "Price $ " + itemCard.price;
+    div2.appendChild(p2);
+    let a = document.createElement("a");
+    a.href = "#";
+    a.className = "btn btnHome";
+    a.textContent = "Ver mas";
+    div2.appendChild(a);
+    div1.appendChild(div2);
+    div.appendChild(div1);
+    fragmento.appendChild(div);
+  }
+
+  listCards.appendChild(fragmento);
+
+  /* for (item of array) {
     document.getElementById("cardsHome").innerHTML +=
       "<div class='card'><img src='" +
       item.image +
@@ -193,8 +235,8 @@ const dibujarCards = (array) => {
       item.description +
       "</p><div class='d-flex justify-content-between w-100 align-content-center'><p class='card-text'>Price $" +
       item.price +
-      "</p><a href='./details.html' class='btn btnHome'>Ver mas</a></div></div></div>";
-  }
+      "</p><a href='#' class='btn btnHome' >Ver mas</a></div></div></div>";
+  } */
 };
 
 // se encarga de llamar al dibujo de cards y a su vez extrae los valores de las categorias
@@ -209,13 +251,54 @@ const dibujarCardsInicial = (array) => {
 };
 
 const dibujarCat = (array) => {
-  for (cat of array) {
+  let listCategories = document.getElementById("categoriesHome");
+
+  let fragmento = document.createDocumentFragment();
+
+  for (let cat of array) {
+    let div = document.createElement("div");
+    div.className = "form-check";
+    let label = document.createElement("label");
+    let input = document.createElement("input");
+    input.className = "check";
+    input.type = "checkbox";
+    input.name = "catSel";
+    input.value = cat;
+    label.appendChild(input);
+    let span = document.createElement("span");
+    span.textContent = cat;
+    label.appendChild(span);
+    div.appendChild(label);
+    fragmento.appendChild(div);
+  }
+
+  listCategories.appendChild(fragmento);
+
+  /*   for (cat of array) {
     document.getElementById("categoriesHome").innerHTML +=
       "<div class='form-check'><label><input class='check' type='checkbox' name='catSel' value='" +
       cat +
       "'> <span>" +
       cat +
       "</span> </label> </div>";
+  } */
+};
+
+// funcion buscardor
+
+const buscarContenido = (array, consulta) => {
+  for (item of array) {
+    if (
+      item.name.includes(consulta) ||
+      item.date.includes(consulta) ||
+      item.description.includes(consulta) ||
+      item.category.includes(consulta) ||
+      item.place.includes(consulta) ||
+      item.capacity.includes(consulta) ||
+      item.estimate.includes(consulta) ||
+      item.price.includes(consulta)
+    ) {
+    }
   }
 };
 
@@ -272,3 +355,20 @@ checkbox.addEventListener("change", (event) => {
     dibujarCards(cardsFiltradas);
   }
 });
+
+let buttonSearch = "";
+
+const input = document.getElementById("aSearch");
+input.addEventListener("click", (event) => {
+  buttonSearch = document.forms["formSearch"]["inputSearch"].value;
+  console.log("esto es buscador");
+  console.log(event);
+  console.log("esto es buttonSearch");
+  console.log(buttonSearch);
+});
+
+/* 
+const verMas = document.querySelector(".btnHome");
+verMas.addEventListener("change", (event) => {
+  console.log("esto es event VERMAS" + event.target);
+}); */
