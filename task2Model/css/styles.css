@@ -291,6 +291,11 @@ table td {
   background-color: #a69616ff;
 }
 
+
+
+
+
+
 @media only screen and (max-width: 375px) and (min-width: 319px) {
   .navbar-collapse {
     display: flex;

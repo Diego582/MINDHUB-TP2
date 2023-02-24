@@ -287,19 +287,21 @@ const dibujarCat = (array) => {
 // funcion buscardor
 
 const buscarContenido = (array, consulta) => {
-  for (item of array) {
+  cardSearch = [];
+  for (let item of array) {
     if (
       item.name.includes(consulta) ||
       item.date.includes(consulta) ||
       item.description.includes(consulta) ||
       item.category.includes(consulta) ||
-      item.place.includes(consulta) ||
-      item.capacity.includes(consulta) ||
-      item.estimate.includes(consulta) ||
-      item.price.includes(consulta)
+      item.place.includes(consulta)
     ) {
+      cardSearch.push(item);
     }
   }
+  document.getElementById("cardsHome").innerHTML = "";
+  console.log("esto es cardSearch", cardSearch);
+  dibujarCards(cardSearch);
 };
 
 // se hace una copia inmutable del  array
@@ -358,15 +360,20 @@ checkbox.addEventListener("change", (event) => {
 
 let buttonSearch = "";
 
-const input = document.getElementById("aSearch");
-input.addEventListener("click", (event) => {
+let cardSearch = [];
+const aSearch = document.getElementById("aSearch");
+aSearch.addEventListener("click", (event) => {
   buttonSearch = document.forms["formSearch"]["inputSearch"].value;
-  console.log("esto es buscador");
-  console.log(event);
-  console.log("esto es buttonSearch");
-  console.log(buttonSearch);
+  buscarContenido(cardSeleccionadas, buttonSearch);
+  console.log(cardSearch);
 });
 
+const input = document.getElementById("inputSearch");
+input.addEventListener("click", (event) => {
+  if (!event.target.value) {
+    dibujarCards(cardSeleccionadas);
+  }
+});
 /* 
 const verMas = document.querySelector(".btnHome");
 verMas.addEventListener("change", (event) => {
