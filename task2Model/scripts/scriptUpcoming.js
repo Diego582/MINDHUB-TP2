@@ -188,8 +188,10 @@ const dibujarCards = (array) => {
   let fragmento = document.createDocumentFragment();
 
   for (let itemCard of array) {
-    let div = document.createElement("div");
+    let div = document.createElement("form");
     div.className = "card";
+    div.method = "GET";
+    div.action = "./details.html";
     let img = document.createElement("img");
     img.src = itemCard.image;
     img.className = "card-img-top";
@@ -213,11 +215,13 @@ const dibujarCards = (array) => {
     p2.className = "card-text";
     p2.textContent = "Price $ " + itemCard.price;
     div2.appendChild(p2);
-    let a = document.createElement("a");
-    a.href = "#";
-    a.className = "btn btnHome";
-    a.textContent = "Ver mas";
-    div2.appendChild(a);
+    let button = document.createElement("button");
+    button.textContent = "Ver mas";
+    button.className = "btn btnHome";
+    button.type = "submit";
+    button.name = "id";
+    button.value = itemCard._id;
+    div2.appendChild(button);
     div1.appendChild(div2);
     div.appendChild(div1);
     fragmento.appendChild(div);
@@ -275,7 +279,7 @@ const dibujarCat = (array) => {
   }
 
   listCategories.appendChild(fragmento);
-/*   for (cat of array) {
+  /*   for (cat of array) {
     document.getElementById("categoriesHome").innerHTML +=
       "<div class='form-check'><label><input class='check' type='checkbox' name='catSel' value='" +
       cat +
