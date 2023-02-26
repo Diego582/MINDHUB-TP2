@@ -181,7 +181,119 @@ var data = {
   ],
 };
 
-let i = 0;
+let id = parseInt(location.search.substring(4, 6));
+console.log(location.search);
+console.log(id);
+
+let listCards = document.getElementById("cardDetails");
+
+let fragmento = document.createDocumentFragment();
+
+let keyItem = [];
+for (let cardDetail of data.events) {
+  if (cardDetail._id == id) {
+    for (const key in cardDetail) {
+      keyItem.push(key.toUpperCase());
+    }
+
+    console.log("ingreso en el ", cardDetail._id);
+    let div = document.createElement("div");
+    div.className =
+      "bg-white col-5 d-flex justify-space-center align-items-center flex-grow-1 imgDetails";
+    let img = document.createElement("img");
+    img.src = cardDetail.image;
+    img.className = "card-img object-fit-contain border rounded";
+    img.alt = cardDetail.name;
+    div.appendChild(img);
+    fragmento.appendChild(div);
+    let div1 = document.createElement("div");
+    div1.className = "col-1";
+    fragmento.appendChild(div1);
+    let div2 = document.createElement("div");
+    div2.className =
+      "bg-white col-5 row align-items-center text-center flex-grow-1 cardTextDetails";
+    let h5 = document.createElement("h5");
+    h5.className = "card-title fs-1";
+    h5.textContent = cardDetail.name;
+    div2.appendChild(h5);
+    let div21 = document.createElement("div");
+    div21.className = "d-flex justify-content-around";
+    let span = document.createElement("span");
+    span.className = "card-text fs-5";
+    span.textContent = keyItem[5];
+    div21.appendChild(span);
+    let p = document.createElement("p");
+    p.className = "card-text fs-5";
+    p.textContent = cardDetail.category;
+    div21.appendChild(p);
+    let span1 = document.createElement("span");
+    span1.className = "card-text fs-5";
+    span1.textContent = keyItem[3];
+    div21.appendChild(span1);
+    let p1 = document.createElement("p");
+    p1.className = "card-text fs-5";
+    p1.textContent = cardDetail.date;
+    div21.appendChild(p1);
+    div2.appendChild(div21);
+    let div22 = document.createElement("div");
+    div22.className = "d-flex justify-content-around";
+    let span2 = document.createElement("span");
+    span2.className = "card-text fs-5";
+    span2.textContent = keyItem[4];
+    div22.appendChild(span2);
+    let p2 = document.createElement("p");
+    p2.className = "card-text fs-5";
+    p2.textContent = cardDetail.description;
+    div22.appendChild(p2);
+    div2.appendChild(div22);
+    let div23 = document.createElement("div");
+    div23.className = "d-flex justify-content-around";
+    let span31 = document.createElement("span");
+    span31.className = "card-text fs-5 m-2";
+    span31.textContent = keyItem[7];
+    div23.appendChild(span31);
+    let p31 = document.createElement("p");
+    p31.className = "card-text fs-5 m-2";
+    p31.textContent = cardDetail.capacity;
+    div23.appendChild(p31);
+    let span32 = document.createElement("span");
+    span32.className = "card-text fs-5 m-2";
+    span32.textContent = keyItem[8];
+    div23.appendChild(span32);
+    let p32 = document.createElement("p");
+    p32.className = "card-text fs-5 m-2";
+    if (cardDetail.assistance) {
+      p32.textContent = cardDetail.assistance;
+    } else {
+      p32.textContent = cardDetail.estimate;
+    }
+    div23.appendChild(p32);
+    div2.appendChild(div23);
+    let div24 = document.createElement("div");
+    div24.className = "d-flex justify-content-around";
+    let span41 = document.createElement("span");
+    span41.className = "card-text fs-5 m-2";
+    span41.textContent = keyItem[6];
+    div24.appendChild(span41);
+    let p41 = document.createElement("p");
+    p41.className = "card-text fs-5 m-2";
+    p41.textContent = cardDetail.place;
+    div24.appendChild(p41);
+    let span42 = document.createElement("span");
+    span42.className = "card-text fs-5 m-2";
+    span42.textContent = keyItem[9] + " $ ";
+    div24.appendChild(span42);
+    let p42 = document.createElement("p");
+    p42.className = "card-text fs-5 m-2";
+    p42.textContent = cardDetail.price;
+    div24.appendChild(p42);
+    div2.appendChild(div24);
+    fragmento.appendChild(div2);
+  }
+}
+listCards.appendChild(fragmento);
+
+/*let i = 0;
 for (i = 0; i < 1; i++) {
   console.log("ingresa al for");
   document.getElementById("cardDetails").innerHTML +=
@@ -211,7 +323,7 @@ for (i = 0; i < 1; i++) {
     data.events[i].assistance +
     "</p></div>" +
     "</div>";
-}
+} */
 
 /* 
 
