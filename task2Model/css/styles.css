@@ -291,11 +291,6 @@ table td {
   background-color: #a69616ff;
 }
 
-
-
-
-
-
 @media only screen and (max-width: 375px) and (min-width: 319px) {
   .navbar-collapse {
     display: flex;
@@ -332,6 +327,7 @@ table td {
     flex-direction: column;
     flex-wrap: wrap;
     margin: 0;
+    font-size: medium;
   }
 
   .imgDetails {
@@ -341,8 +337,18 @@ table td {
   .cardTextDetails {
     width: 100vw;
     margin: 10px 0px;
-    font-size: medium;
   }
+  .categoryDetails {
+    flex-wrap: wrap;
+    justify-content: center !important;
+  }
+
+  .dateDetails {
+    flex-wrap: wrap;
+    justify-content: center !important;
+  }
+  
+
 }
 
 @media only screen and (max-width: 425px) and (min-width: 376px) {
