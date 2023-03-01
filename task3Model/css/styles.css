@@ -1,0 +1,433 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.navbar img {
+  height: 50px;
+}
+
+.nav-link {
+  background-color: #d90368ff;
+  color: white;
+  width: 135px;
+  font-size: 14px;
+  border-radius: 5%;
+  -webkit-border-radius: 5%;
+  -moz-border-radius: 5%;
+  -ms-border-radius: 5%;
+  -o-border-radius: 5%;
+}
+
+.navbar-nav .nav-link.active {
+  color: white;
+  text-shadow: 1px 1px black;
+  background-color: #a69616ff;
+}
+
+.carousel {
+  background-color: #733150ff;
+  height: 150px;
+}
+
+footer {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #271f1bff;
+  background-image: url("../images/footer2.jpg");
+  background-position: center;
+  position: relative;
+  color: white;
+  order: 5;
+  justify-content: center;
+  align-content: center;
+  z-index: 1;
+  padding-top: 20px;
+  min-height: 15vh;
+  width: 100vw;
+}
+
+footer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(39, 31, 27, 0.7);
+  z-index: -1;
+}
+
+footer a {
+  text-decoration: none;
+  color: white;
+}
+
+.iconosFooter {
+  color: white;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
+
+.iconosFooter svg {
+  width: 30px;
+  height: 30px;
+}
+
+.iconosFooter svg:hover {
+  width: 35px;
+  height: 35px;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 50%;
+  background-color: #ff1c86;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
+.cards {
+  background-color: #ff1c86;
+}
+
+.cards img {
+  object-fit: cover;
+  height: 8rem;
+  width: 100%;
+  border-radius: 4%;
+  -webkit-border-radius: 4%;
+  -moz-border-radius: 4%;
+  -ms-border-radius: 4%;
+  -o-border-radius: 4%;
+}
+
+#cardsHome {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+#cardsHome > .card {
+  margin: 10px;
+  width: 17rem;
+}
+
+#cardsUpcoming {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+#cardsUpcoming > .card {
+  margin: 10px;
+  width: 17rem;
+}
+
+#cardsPast {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+#cardsPast > .card {
+  margin: 10px;
+  width: 17rem;
+}
+
+#categoriesHome {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+#categoriesHome > .form-check {
+  margin: 5px 15px;
+  padding-left: 0;
+  width: 9rem;
+}
+
+#categoriesHome label {
+  display: flex;
+  align-items: center;
+}
+
+.cardDetails {
+  width: 90vw;
+  min-height: 75vh;
+  background-color: #733150ff;
+  margin: 20px;
+  padding: 30px;
+}
+
+.imgDetails {
+  height: auto;
+}
+
+.btnHome {
+  background-color: #a69616ff;
+  color: white;
+}
+
+.btnHome:hover {
+  background-color: #733150ff;
+  color: white;
+}
+
+.botonSearch {
+  background-color: #733150ff;
+  border-radius: 5%;
+  color: white;
+  -webkit-border-radius: 5%;
+  -moz-border-radius: 5%;
+  -ms-border-radius: 5%;
+  -o-border-radius: 5%;
+}
+
+.botonSearch svg {
+  width: 24px;
+  height: 24px;
+  background-color: #733150ff;
+}
+
+.botonSearch a {
+  text-decoration: none;
+  color: white;
+}
+
+.row {
+  margin-right: 0;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+header {
+  min-height: 30vh;
+  width: 100vw;
+}
+
+.headerDetails {
+  min-height: 100px;
+}
+
+main {
+  min-height: 50vh;
+  width: 100vw;
+  height: auto;
+}
+
+.textDetails {
+  text-align: justify;
+}
+
+table td {
+  height: 2em;
+  border-left: 1px solid gray;
+  border-right: 1px solid gray;
+  text-align: center;
+}
+
+.card {
+  margin: 10px 0px;
+}
+
+.card p {
+  text-align: justify;
+}
+
+.busqueda {
+  width: 300px;
+  margin: 10px 15px;
+}
+
+.btnContact {
+  background-color: #a69616ff;
+  color: white;
+  width: 10vw;
+}
+
+.btnContact:hover {
+  background-color: #733150ff;
+  color: white;
+}
+
+.formContact {
+  width: 50vw;
+}
+
+.Cohort {
+  margin-right: 20px;
+}
+
+.check {
+  appearance: none;
+  cursor: pointer;
+  background-color: #733150ff;
+  border-radius: 5%;
+  width: 20px;
+  height: 20px;
+  margin: 5px;
+  transition: background-color ease-in-out 0.3s;
+  -webkit-transition: background-color ease-in-out 0.3s;
+  -moz-transition: background-color ease-in-out 0.3s;
+  -ms-transition: background-color ease-in-out 0.3s;
+  -o-transition: background-color ease-in-out 0.3s;
+  -webkit-border-radius: 5%;
+  -moz-border-radius: 5%;
+  -ms-border-radius: 5%;
+  -o-border-radius: 5%;
+}
+
+.check:checked {
+  background-image: url("../images/marcaVerif1.png");
+  background-position: center;
+  background-color: #a69616ff;
+}
+
+@media only screen and (max-width: 375px) and (min-width: 319px) {
+  .navbar-collapse {
+    display: flex;
+    justify-content: center !important;
+  }
+
+  .categorias {
+    width: 100%;
+  }
+
+  .Cohort {
+    margin: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .iconosFooter {
+    margin: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .formContact {
+    width: 75vw;
+  }
+
+  .btnContact {
+    width: 50vw;
+  }
+
+  .cardDetails {
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin: 0;
+    font-size: medium;
+  }
+
+  .imgDetails {
+    width: 100vw;
+  }
+
+  .cardTextDetails {
+    width: 100vw;
+    margin: 10px 0px;
+  }
+  .categoryDetails {
+    flex-wrap: wrap;
+    justify-content: center !important;
+  }
+
+  .dateDetails {
+    flex-wrap: wrap;
+    justify-content: center !important;
+  }
+  
+
+}
+
+@media only screen and (max-width: 425px) and (min-width: 376px) {
+  .navbar-collapse {
+    display: flex;
+    justify-content: center !important;
+  }
+
+  .categorias {
+    width: 100%;
+  }
+  .Cohort {
+    margin: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center !important;
+  }
+  .iconosFooter {
+    margin: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .formContact {
+    width: 75vw;
+  }
+
+  .btnContact {
+    width: 50vw;
+  }
+
+  .cardDetails {
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin: 0;
+  }
+
+  .imgDetails {
+    width: 100vw;
+  }
+
+  .cardTextDetails {
+    width: 100vw;
+    margin: 10px 0px;
+    font-size: medium;
+  }
+}
+
+@media only screen and (max-width: 768px) and (min-width: 426px) {
+  .navbar-collapse {
+    display: flex;
+    justify-content: center !important;
+  }
+
+  .categorias {
+    width: 100%;
+  }
+  .Cohort {
+    margin: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center !important;
+  }
+  .iconosFooter {
+    margin: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .busqueda {
+    width: 100%;
+  }
+  .formContact {
+    width: 75vw;
+  }
+
+  .btnContact {
+    width: 50vw;
+  }
+}
