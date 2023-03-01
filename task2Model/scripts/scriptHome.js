@@ -368,13 +368,19 @@ let cardSearch = [];
 const aSearch = document.getElementById("aSearch");
 aSearch.addEventListener("click", (event) => {
   buttonSearch = document.forms["formSearch"]["inputSearch"].value;
-  buscarContenido(cardSeleccionadas, buttonSearch);
-  console.log(cardSearch);
+  //revisar todavia no funciona
+  if (buttonSearch && cardsFiltradas.length) {
+    buscarContenido(cardsFiltradas, buttonSearch);
+  }
+  if (buttonSearch) {
+    buscarContenido(cardSeleccionadas, buttonSearch);
+  }
 });
 
 const input = document.getElementById("inputSearch");
 input.addEventListener("click", (event) => {
-  if (!event.target.value) {
+  //se aplica para que si esta vacio y no hay categoriasfiltradas dibuje todas las cards
+  if (!event.target.value && !categoriesSelected.length) {
     document.getElementById("cardsHome").innerHTML = "";
     dibujarCards(cardSeleccionadas);
   }
