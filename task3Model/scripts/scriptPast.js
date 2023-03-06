@@ -5,7 +5,7 @@ const dibujarCards = (array) => {
   let fragmento = document.createDocumentFragment();
 
   for (let itemCard of array) {
-    let div = document.createElement("form");
+    let div = document.createElement("div");
     div.className = "card";
     div.method = "GET";
     div.action = "./details.html";
@@ -32,13 +32,11 @@ const dibujarCards = (array) => {
     p2.className = "card-text";
     p2.textContent = "Price $ " + itemCard.price;
     div2.appendChild(p2);
-    let button = document.createElement("button");
-    button.textContent = "Ver mas";
-    button.className = "btn btnHome";
-    button.type = "submit";
-    button.name = "id";
-    button.value = itemCard._id;
-    div2.appendChild(button);
+    let a = document.createElement("a");
+    a.textContent = "Ver mas";
+    a.className = "btn btnHome";
+    a.href = `./details.html?id=${itemCard._id}`;
+    div2.appendChild(a);
     div1.appendChild(div2);
     div.appendChild(div1);
     fragmento.appendChild(div);
@@ -105,6 +103,34 @@ const dibujarCat = (array) => {
   } */
 };
 
+const handleModal = (title, menssage, valor) => {
+  if (modalNuevo !== null) {
+    modalNuevo.remove();
+  }
+
+  modalNuevo = document.createElement("div");
+  modalNuevo.innerHTML = `<div class="modal" tabindex="-1">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title">${title}</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <p><strong>${valor}</strong>  ${menssage}</p>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-Modal" data-bs-dismiss="modal">Close</button>
+          </div>
+      </div>
+  </div>
+</div>`;
+  document.body.append(modalNuevo);
+
+  const modal = new bootstrap.Modal(modalNuevo.querySelector(".modal"));
+  modal.show();
+};
+
 // funcion buscardor
 // funcion buscardor
 
@@ -119,6 +145,15 @@ const buscarContenido = (array, consulta) => {
     }
   }
   document.getElementById("cardsPast").innerHTML = "";
+
+  if (!cardSearch.length) {
+    handleModal(
+      "Search error",
+      "Does not return results, search with another value.",
+      consulta
+    );
+  }
+
   dibujarCards(cardSearch);
 };
 
@@ -228,6 +263,7 @@ let cardSeleccionadas = data.events.filter(
 
 let categories = [];
 let cardsFiltradas = [];
+let modalNuevo = null;
 
 // se dibuja inicialmente
 

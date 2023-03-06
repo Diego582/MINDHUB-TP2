@@ -1,19 +1,18 @@
 let id = parseInt(location.search.substring(4, 6));
-console.log(location.search);
-console.log(id);
 
 let listCards = document.getElementById("cardDetails");
 
 let fragmento = document.createDocumentFragment();
 
 let keyItem = [];
-for (let cardDetail of data.events) {
+
+const cardFiltrada = data.events.filter((item) => item._id == id);
+
+for (let cardDetail of cardFiltrada) {
   if (cardDetail._id == id) {
     for (const key in cardDetail) {
       keyItem.push(key.toUpperCase());
     }
-
-    console.log("ingreso en el ", cardDetail._id);
     let div = document.createElement("div");
     div.className =
       "bg-white col-5 d-flex justify-space-center align-items-center flex-grow-1 imgDetails";
@@ -141,49 +140,3 @@ for (let cardDetail of data.events) {
   }
 }
 listCards.appendChild(fragmento);
-
-/*let i = 0;
-for (i = 0; i < 1; i++) {
-  console.log("ingresa al for");
-  document.getElementById("cardDetails").innerHTML +=
-    "<div class= 'bg-white col-5 d-flex justify-space-center align-items-center flex-grow-1 imgDetails'>" +
-    "<img src=" +
-    data.events[i].image +
-    " class='card-img object-fit-contain border rounded' alt='...'></div><div class='col-1'></div>" +
-    "<div class=' bg-white col-5 row align-items-center text-center flex-grow-1 cardTextDetails '>" +
-    "<h5 class='card-title fs-1'>" +
-    data.events[i].name +
-    "</h5>" +
-    "<div class='d-flex justify-content-around'><p class='card-text fs-5'>Category: " +
-    data.events[i].category +
-    "</p>" +
-    "<p class='card-text fs-5'>Date: " +
-    data.events[i].date +
-    "</p></div>" +
-    "<div><p class='card-text textDetails'>" +
-    data.events[i].description +
-    "</p> <p class='card-text fs-3'>Price $" +
-    data.events[i].price +
-    "</p></div>" +
-    "<div class='d-flex justify-content-around'><p class='card-text fs-5'>Capacity: " +
-    data.events[i].capacity +
-    "</p>" +
-    "<p class='card-text fs-5'>Assitance: " +
-    data.events[i].assistance +
-    "</p></div>" +
-    "</div>";
-} */
-
-/* 
-
-
-
-
-
-  
-
-     $0000
-
-
-
- */
