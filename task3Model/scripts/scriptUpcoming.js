@@ -45,21 +45,6 @@ const dibujarCards = (array) => {
   }
 
   listCards.appendChild(fragmento);
-
-  /* 
-
-  for (item of array) {
-    document.getElementById("cardsUpcoming").innerHTML +=
-      "<div class='card'><img src='" +
-      item.image +
-      " class='card-img-top' alt='...'><div class='card-body d-flex flex-column align-items-center justify-content-between'><h5 class='card-title'>" +
-      item.name +
-      "</h5><p class='card-text'>" +
-      item.description +
-      "</p><div class='d-flex justify-content-between w-100 align-content-center'><p class='card-text'>Price $" +
-      item.price +
-      "</p><a href='./details.html' class='btn btnHome'>Ver mas</a></div></div></div>";
-  } */
 };
 
 // se encarga de llamar al dibujo de cards y a su vez extrae los valores de las categorias
@@ -96,14 +81,6 @@ const dibujarCat = (array) => {
   }
 
   listCategories.appendChild(fragmento);
-  /*   for (cat of array) {
-    document.getElementById("categoriesHome").innerHTML +=
-      "<div class='form-check'><label><input class='check' type='checkbox' name='catSel' value='" +
-      cat +
-      "'> <span>" +
-      cat +
-      "</span> </label> </div>";
-  } */
 };
 
 // funcion buscardor
@@ -112,18 +89,113 @@ const buscarContenido = (array, consulta) => {
   cardSearch = [];
   for (let item of array) {
     if (
-      item.name.includes(consulta) ||
-      item.date.includes(consulta) ||
-      item.description.includes(consulta) ||
-      item.category.includes(consulta) ||
-      item.place.includes(consulta)
+      item.name.toLowerCase().includes(consulta.toLowerCase()) ||
+      item.description.toLowerCase().includes(consulta.toLowerCase())
     ) {
       cardSearch.push(item);
     }
   }
   document.getElementById("cardsUpcoming").innerHTML = "";
-
   dibujarCards(cardSearch);
+};
+
+const handleFilterCategegory = (event) => {
+  // en cada vuelta vaciar el arreglo cards filtrada
+  cardsFiltradas = [];
+  // ARMADO DEL FILTRO se condiciona el ingreso si no esta agrega el valor
+
+  if (!categoriesSelected.includes(event.target.value)) {
+    categoriesSelected.push(event.target.value);
+  } else {
+    // se condiciona el ingreso si ya esta se busca y se borra
+    categoriesSelected.splice(
+      categoriesSelected.indexOf(event.target.value),
+      1
+    );
+  }
+
+  // si hay categoriesSelected hay filtro
+  if (categoriesSelected.length) {
+    // se realiza un foreach y se analiza cada instancia si es una categoria filtrada
+    data.events.forEach((element) => {
+      if (categoriesSelected.includes(element.category)) {
+        cardsFiltradas.push(element);
+      }
+    });
+  }
+
+  // si hay card selected y hay valor buscado
+  if (categoriesSelected.length && buttonSearch) {
+    //vaciar html antes de dibujar
+    document.getElementById("cardsUpcoming").innerHTML = "";
+    buscarContenido(cardsFiltradas, buttonSearch);
+  }
+
+  // si no hay categoriesSelectd redibujar completo
+  if (!categoriesSelected.length && !buttonSearch) {
+    //vaciar html antes de dibujar
+    document.getElementById("cardsUpcoming").innerHTML = "";
+    dibujarCards(cardSeleccionadas);
+  }
+  if (categoriesSelected.length && !buttonSearch) {
+    //se vacia el innerHTML
+    document.getElementById("cardsUpcoming").innerHTML = "";
+
+    // se dibuja nuevamente pero solo con las cards filtradas
+    dibujarCards(cardsFiltradas);
+  }
+  if (!categoriesSelected.length && buttonSearch) {
+    //se vacia el innerHTML
+    document.getElementById("cardsUpcoming").innerHTML = "";
+    buscarContenido(cardSeleccionadas, buttonSearch);
+  }
+};
+
+// funcion buscardor
+
+const handleSearchButton = () => {
+  buttonSearch = document.forms["formSearch"]["inputSearch"].value;
+
+  //revisar todavia no funciona
+  if (buttonSearch && cardsFiltradas.length) {
+    buscarContenido(cardsFiltradas, buttonSearch);
+  } else if (buttonSearch) {
+    buscarContenido(cardSeleccionadas, buttonSearch);
+  }
+};
+
+const handleSearch = (event) => {
+  buttonSearch = document.forms["formSearch"]["inputSearch"].value;
+  //
+  if (!event.target.value.length) {
+    buttonSearch = "";
+  }
+  //se aplica para que si esta vacio y no hay categoriasfiltradas dibuje todas las cards
+  if (!event.target.value.length && !categoriesSelected.length) {
+    document.getElementById("cardsUpcoming").innerHTML = "";
+    dibujarCards(cardSeleccionadas);
+  }
+  if (event.target.value.length && categoriesSelected.length) {
+    if (cardsFiltradas.length) {
+      buscarContenido(cardsFiltradas, buttonSearch);
+    } else {
+      buscarContenido(cardSeleccionadas, buttonSearch);
+    }
+  }
+  if (event.target.value.length && !categoriesSelected.length) {
+    if (cardsFiltradas.length) {
+      buscarContenido(cardsFiltradas, buttonSearch);
+    } else {
+      buscarContenido(cardSeleccionadas, buttonSearch);
+    }
+  }
+  if (!event.target.value.length && categoriesSelected.length) {
+    if (cardsFiltradas.length) {
+      buscarContenido(cardsFiltradas, buttonSearch);
+    } else {
+      buscarContenido(cardSeleccionadas, buttonSearch);
+    }
+  }
 };
 
 // se hace una copia del array filtrando los events
@@ -141,61 +213,20 @@ dibujarCardsInicial(cardSeleccionadas);
 // se dibuja las categorias que se filtraron de la data
 dibujarCat(categories);
 
-// escucho el event en CategoriesHome y reacciona en base a la info
-const checkbox = document.getElementById("categoriesHome");
 let categoriesSelected = [];
-
-checkbox.addEventListener("change", (event) => {
-  // en cada vuelta vaciar el arreglo cards filtrada
-  cardsFiltradas = [];
-  // se condiciona el ingreso si no esta agrega el valor de categorias
-
-  if (!categoriesSelected.includes(event.target.value)) {
-    categoriesSelected.push(event.target.value);
-  } else {
-    // se condiciona el ingreso si ya esta se busca y se borra
-    categoriesSelected.splice(
-      categoriesSelected.indexOf(event.target.value),
-      1
-    );
-  }
-
-  // si no hay categoriesSelectd redibujar completo
-  if (!categoriesSelected.length) {
-    //vaciar html antes de dibujar
-    document.getElementById("cardsUpcoming").innerHTML = "";
-    dibujarCards(cardSeleccionadas);
-  }
-
-  // si hay categoriesSelected hay filtro
-  if (categoriesSelected.length) {
-    // se realiza un foreach y se analiza cada instancia si es una categoria filtrada
-    cardSeleccionadas.forEach((element) => {
-      if (categoriesSelected.includes(element.category)) {
-        cardsFiltradas.push(element);
-      }
-    });
-    //se vacia el innerHTML
-    document.getElementById("cardsUpcoming").innerHTML = "";
-    // se dibuja nuevamente pero solo con las cards filtradas
-    dibujarCards(cardsFiltradas);
-  }
-});
-
 let buttonSearch = "";
-
 let cardSearch = [];
 const aSearch = document.getElementById("aSearch");
-aSearch.addEventListener("click", (event) => {
-  buttonSearch = document.forms["formSearch"]["inputSearch"].value;
-  buscarContenido(cardSeleccionadas, buttonSearch);
-  console.log(cardSearch);
-});
-
 const input = document.getElementById("inputSearch");
-input.addEventListener("click", (event) => {
-  if (!event.target.value) {
-    document.getElementById("cardsUpcoming").innerHTML = "";
-    dibujarCards(cardSeleccionadas);
-  }
+const checkbox = document.getElementById("categoriesHome");
+
+// envio de los eventos de los check a la funcion
+checkbox.addEventListener("change", (event) => handleFilterCategegory(event));
+// envio los click de la lupa a la funcion
+aSearch.addEventListener("click", (event) => {
+  handleSearchButton();
+});
+//envio los enter y borrado del input a la funcion
+input.addEventListener("search", (event) => {
+  handleSearch(event);
 });
