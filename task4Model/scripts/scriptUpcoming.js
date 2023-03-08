@@ -1,6 +1,6 @@
 // se encarga de dibujar los cards en el html
 const dibujarCards = (array) => {
-  let listCards = document.getElementById("cardsHome");
+  let listCards = document.getElementById("cardsUpcoming");
 
   let fragmento = document.createDocumentFragment();
 
@@ -80,7 +80,6 @@ const dibujarCat = (array) => {
 
   listCategories.appendChild(fragmento);
 };
-// se encarga de filtrar por categoria
 
 const handleModal = (title, menssage, valor) => {
   if (modalNuevo !== null) {
@@ -110,6 +109,8 @@ const handleModal = (title, menssage, valor) => {
   modal.show();
 };
 
+// funcion buscardor
+
 const buscarContenido = (array, consulta) => {
   cardSearch = [];
   for (let item of array) {
@@ -120,8 +121,8 @@ const buscarContenido = (array, consulta) => {
       cardSearch.push(item);
     }
   }
-  document.getElementById("cardsHome").innerHTML = "";
-  
+  document.getElementById("cardsUpcoming").innerHTML = "";
+
   if (!cardSearch.length) {
     handleModal(
       "Search error",
@@ -160,28 +161,26 @@ const handleFilterCategegory = (event) => {
   // si hay card selected y hay valor buscado
   if (categoriesSelected.length && buttonSearch) {
     //vaciar html antes de dibujar
-    document.getElementById("cardsHome").innerHTML = "";
+    document.getElementById("cardsUpcoming").innerHTML = "";
     buscarContenido(cardsFiltradas, buttonSearch);
   }
 
   // si no hay categoriesSelectd redibujar completo
   if (!categoriesSelected.length && !buttonSearch) {
     //vaciar html antes de dibujar
-    document.getElementById("cardsHome").innerHTML = "";
+    document.getElementById("cardsUpcoming").innerHTML = "";
     dibujarCards(cardSeleccionadas);
   }
-
   if (categoriesSelected.length && !buttonSearch) {
     //se vacia el innerHTML
-    document.getElementById("cardsHome").innerHTML = "";
+    document.getElementById("cardsUpcoming").innerHTML = "";
 
     // se dibuja nuevamente pero solo con las cards filtradas
     dibujarCards(cardsFiltradas);
   }
-
   if (!categoriesSelected.length && buttonSearch) {
     //se vacia el innerHTML
-    document.getElementById("cardsHome").innerHTML = "";
+    document.getElementById("cardsUpcoming").innerHTML = "";
     buscarContenido(cardSeleccionadas, buttonSearch);
   }
 };
@@ -191,7 +190,7 @@ const handleFilterCategegory = (event) => {
 const handleSearchButton = () => {
   buttonSearch = document.forms["formSearch"]["inputSearch"].value;
 
-  //
+  //revisar todavia no funciona
   if (buttonSearch && cardsFiltradas.length) {
     buscarContenido(cardsFiltradas, buttonSearch);
   } else if (buttonSearch) {
@@ -205,13 +204,11 @@ const handleSearch = (event) => {
   if (!event.target.value.length) {
     buttonSearch = "";
   }
-
   //se aplica para que si esta vacio y no hay categoriasfiltradas dibuje todas las cards
   if (!event.target.value.length && !categoriesSelected.length) {
-    document.getElementById("cardsHome").innerHTML = "";
+    document.getElementById("cardsUpcoming").innerHTML = "";
     dibujarCards(cardSeleccionadas);
   }
-
   if (event.target.value.length && categoriesSelected.length) {
     if (cardsFiltradas.length) {
       buscarContenido(cardsFiltradas, buttonSearch);
@@ -219,8 +216,6 @@ const handleSearch = (event) => {
       buscarContenido(cardSeleccionadas, buttonSearch);
     }
   }
-
-
   if (event.target.value.length && !categoriesSelected.length) {
     if (cardsFiltradas.length) {
       buscarContenido(cardsFiltradas, buttonSearch);
@@ -228,9 +223,6 @@ const handleSearch = (event) => {
       buscarContenido(cardSeleccionadas, buttonSearch);
     }
   }
-
-
-
   if (!event.target.value.length && categoriesSelected.length) {
     if (cardsFiltradas.length) {
       buscarContenido(cardsFiltradas, buttonSearch);
@@ -238,22 +230,23 @@ const handleSearch = (event) => {
       buscarContenido(cardSeleccionadas, buttonSearch);
     }
   }
-
 };
 
-// Aqui comienza la logica
-// se hace una copia inmutable del  array
-let cardSeleccionadas = [].concat(data.events);
+// se hace una copia del array filtrando los events
+let cardSeleccionadas = data.events.filter(
+  (event) => event.date > data.currentDate
+);
+
 let categories = [];
 let cardsFiltradas = [];
 let modalNuevo = null;
-// se dibjua inicialmente las cards
+
+// se dibuja inicialmente
+
 dibujarCardsInicial(cardSeleccionadas);
 
 // se dibuja las categorias que se filtraron de la data
 dibujarCat(categories);
-
-// escucho el event en CategoriesHome y reacciona en base a la info
 
 let categoriesSelected = [];
 let buttonSearch = "";
