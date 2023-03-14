@@ -5,10 +5,12 @@ let listCards = document.getElementById("cardDetails");
 let fragmento = document.createDocumentFragment();
 
 let keyItem = [];
-
-const cardFiltrada = data.events.filter((item) => item._id == id);
-
-for (let cardDetail of cardFiltrada) {
+let cardFiltrada;
+dataEvents();
+setTimeout(() => {
+  console.log("data", data);
+  cardDetail = data.events.find((item) => item._id == id);
+  console.log("cardDetail", cardDetail);
   if (cardDetail._id == id) {
     for (const key in cardDetail) {
       keyItem.push(key.toUpperCase());
@@ -138,5 +140,5 @@ for (let cardDetail of cardFiltrada) {
     div2.appendChild(div24);
     fragmento.appendChild(div2);
   }
-}
-listCards.appendChild(fragmento);
+  listCards.appendChild(fragmento);
+}, 1000);

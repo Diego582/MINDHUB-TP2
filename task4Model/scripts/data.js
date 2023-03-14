@@ -5,6 +5,7 @@ async function dataEvents() {
     .then((response) => response.json())
     .then((dataEvent) => {
       data = dataEvent;
+      console.log("dataevents desde data");
       return data;
     })
     .catch((e) => console.log(e));

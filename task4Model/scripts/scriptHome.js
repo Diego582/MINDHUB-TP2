@@ -241,12 +241,13 @@ const handleSearch = (event) => {
 // se hace una copia inmutable del  array
 dataEvents();
 let cardSeleccionadas;
-setTimeout(() => {
-  cardSeleccionadas = [].concat(data.events);
-  dibujarCardsInicial(cardSeleccionadas);
-  dibujarCat(categories);
-}, 1000);
-
+if (!cardSeleccionadas) {
+  setTimeout(() => {
+    cardSeleccionadas = [].concat(data.events);
+    dibujarCardsInicial(cardSeleccionadas);
+    dibujarCat(categories);
+  }, 1000);
+}
 
 let categories = [];
 let cardsFiltradas = [];
