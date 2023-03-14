@@ -121,7 +121,7 @@ const buscarContenido = (array, consulta) => {
     }
   }
   document.getElementById("cardsHome").innerHTML = "";
-  
+
   if (!cardSearch.length) {
     handleModal(
       "Search error",
@@ -220,7 +220,6 @@ const handleSearch = (event) => {
     }
   }
 
-
   if (event.target.value.length && !categoriesSelected.length) {
     if (cardsFiltradas.length) {
       buscarContenido(cardsFiltradas, buttonSearch);
@@ -229,8 +228,6 @@ const handleSearch = (event) => {
     }
   }
 
-
-
   if (!event.target.value.length && categoriesSelected.length) {
     if (cardsFiltradas.length) {
       buscarContenido(cardsFiltradas, buttonSearch);
@@ -238,20 +235,25 @@ const handleSearch = (event) => {
       buscarContenido(cardSeleccionadas, buttonSearch);
     }
   }
-
 };
 
 // Aqui comienza la logica
 // se hace una copia inmutable del  array
-let cardSeleccionadas = [].concat(data.events);
+dataEvents();
+let cardSeleccionadas;
+setTimeout(() => {
+  cardSeleccionadas = [].concat(data.events);
+  dibujarCardsInicial(cardSeleccionadas);
+  dibujarCat(categories);
+}, 1000);
+
+
 let categories = [];
 let cardsFiltradas = [];
 let modalNuevo = null;
 // se dibjua inicialmente las cards
-dibujarCardsInicial(cardSeleccionadas);
 
 // se dibuja las categorias que se filtraron de la data
-dibujarCat(categories);
 
 // escucho el event en CategoriesHome y reacciona en base a la info
 

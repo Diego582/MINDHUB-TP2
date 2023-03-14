@@ -256,10 +256,19 @@ const handleSearch = (event) => {
   }
 };
 
+dataEvents();
+let cardSeleccionadas;
+setTimeout(() => {
+  console.log("data", data);
+  cardSeleccionadas = data.events.filter(
+    (event) => event.date < data.currentDate
+  );
+  console.log("cardSeleccionadas", cardSeleccionadas);
+  dibujarCardsInicial(cardSeleccionadas);
+  dibujarCat(categories);
+}, 1000);
+
 // se hace una copia del array filtrando los events
-let cardSeleccionadas = data.events.filter(
-  (event) => event.date < data.currentDate
-);
 
 let categories = [];
 let cardsFiltradas = [];
@@ -267,10 +276,7 @@ let modalNuevo = null;
 
 // se dibuja inicialmente
 
-dibujarCardsInicial(cardSeleccionadas);
-
 // se dibuja las categorias que se filtraron de la data
-dibujarCat(categories);
 
 let categoriesSelected = [];
 let buttonSearch = "";
