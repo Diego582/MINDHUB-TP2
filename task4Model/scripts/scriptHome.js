@@ -7,8 +7,6 @@ const dibujarCards = (array) => {
   for (let itemCard of array) {
     let div = document.createElement("div");
     div.className = "card";
-    div.method = "GET";
-    div.action = "./details.html";
     let img = document.createElement("img");
     img.src = itemCard.image;
     img.className = "card-img-top";

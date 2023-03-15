@@ -8,7 +8,7 @@ let keyItem = [];
 let cardFiltrada;
 dataEvents();
 setTimeout(() => {
-  console.log("data", data);
+  console.log("data", data.events);
   cardDetail = data.events.find((item) => item._id == id);
   console.log("cardDetail", cardDetail);
   if (cardDetail._id == id) {
@@ -42,7 +42,7 @@ setTimeout(() => {
     div211.className = "d-flex justify-content-between categoryDetails";
     let span = document.createElement("span");
     span.className = "card-text fs-5 m-2";
-    span.textContent = keyItem[5];
+    span.textContent = keyItem[2];
     div211.appendChild(span);
     let p = document.createElement("p");
     p.className = "card-text fs-5 m-2";
@@ -82,7 +82,7 @@ setTimeout(() => {
     div231.className = "d-flex justify-content-between";
     let span31 = document.createElement("span");
     span31.className = "card-text fs-5 m-2";
-    span31.textContent = keyItem[7];
+    span31.textContent = keyItem[8];
     div231.appendChild(span31);
     let p31 = document.createElement("p");
     p31.className = "card-text fs-5 m-2";
@@ -94,7 +94,7 @@ setTimeout(() => {
     div232.className = "d-flex justify-content-between";
     let span32 = document.createElement("span");
     span32.className = "card-text fs-5 m-2";
-    span32.textContent = keyItem[8];
+    span32.textContent = keyItem[9];
     div232.appendChild(span32);
     let p32 = document.createElement("p");
     p32.className = "card-text fs-5 m-2";
@@ -128,7 +128,7 @@ setTimeout(() => {
 
     let span42 = document.createElement("span");
     span42.className = "card-text fs-5 m-2";
-    span42.textContent = keyItem[9] + " $ ";
+    span42.textContent = keyItem[7] + " $ ";
     div242.appendChild(span42);
     let p42 = document.createElement("p");
     p42.className = "card-text fs-5 m-2";
