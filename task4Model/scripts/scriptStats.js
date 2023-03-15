@@ -1,7 +1,59 @@
 dataEvents();
 
 console.log("data", data);
-const eventsFut = (events) => {
+
+const eventsPre = (array) => {
+  let itemMayor;
+  let itemMenor;
+  let itemMayorAforo;
+  let porcentajeMayor = 0;
+  let porcentajeMenor = 100;
+
+  for (let item of array) {
+    if (!itemMayor) {
+      itemMayor = item;
+    }
+    if (!itemMenor) {
+      itemMenor = item;
+    }
+    if (!itemMayorAforo) {
+      itemMayorAforo = item;
+    }
+
+    if ((item.assistance * 100) / item.capacity > porcentajeMayor) {
+      itemMayor = item;
+      porcentajeMayor = (item.assistance * 100) / item.capacity;
+    }
+
+    if ((item.assistance * 100) / item.capacity < porcentajeMenor) {
+      itemMenor = item;
+      porcentajeMenor = (item.assistance * 100) / item.capacity;
+    }
+
+    if (item.capacity > itemMayorAforo.capacity) {
+      itemMayorAforo = item;
+    }
+  }
+
+  let eventsPresentes = document.getElementById("events");
+
+  let fragmento = document.createDocumentFragment();
+
+  let tdMayor = document.createElement("td");
+  tdMayor.textContent = itemMayor.name;
+  let tdMenor = document.createElement("td");
+  tdMenor.textContent = itemMenor.name;
+  let tdMayorAforo = document.createElement("td");
+  tdMayorAforo.textContent = itemMayorAforo.name;
+
+  fragmento.appendChild(tdMayor);
+  fragmento.appendChild(tdMenor);
+  fragmento.appendChild(tdMayorAforo);
+
+  eventsPresentes.appendChild(fragmento);
+};
+
+/* const eventsFut = (events) => {
   console.log("events", events);
   let categoriesFil;
   for (let categ of events) {
@@ -9,9 +61,9 @@ const eventsFut = (events) => {
       console.log("ingreso a push", categ);
       categoriesFil.push(categ);
     }
-  }
+  } */
 
-  console.log("events", events);
+/*  console.log("events", events);
   let categoriesFut = [...new Set(events.category)];
   console.log("categoriesFut", categoriesFut);
   /// events proximos
@@ -32,24 +84,7 @@ const eventsFut = (events) => {
     fragmentoProx.appendChild(trLinea);
   }
   eventsFuturos.appendChild(fragmentoProx);
-};
-
-let eventsPresentes = document.getElementById("events");
-
-let fragmento = document.createDocumentFragment();
-
-let tdMayor = document.createElement("td");
-tdMayor.textContent = "td Mayor prueba";
-let tdMenor = document.createElement("td");
-tdMenor.textContent = "td Menor prueba";
-let tdMayorAforo = document.createElement("td");
-tdMayorAforo.textContent = "td Mayor Aforo";
-
-fragmento.appendChild(tdMayor);
-fragmento.appendChild(tdMenor);
-fragmento.appendChild(tdMayorAforo);
-
-eventsPresentes.appendChild(fragmento);
+}; */
 
 /// events pasados
 
@@ -71,5 +106,6 @@ fragmentoPasados.appendChild(tdPorPast);
 eventsPasados.appendChild(fragmentoPasados);
 
 setTimeout(() => {
-  eventsFut(data.events);
+  /* eventsFut(data.events); */
+  eventsPre(data.events);
 }, 1000);
