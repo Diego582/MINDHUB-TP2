@@ -1,7 +1,5 @@
 dataEvents();
 
-console.log("data", data);
-
 const eventsPre = (array) => {
   let itemMayor;
   let itemMenor;
@@ -53,59 +51,107 @@ const eventsPre = (array) => {
   eventsPresentes.appendChild(fragmento);
 };
 
-/* const eventsFut = (events) => {
-  console.log("events", events);
-  let categoriesFil;
+const eventsFut = (events) => {
+  console.log("events en event Fut", events);
+  // filtro las categorias recibidas
+  let categoriesFil = [];
   for (let categ of events) {
-    if (!categoriesFil.include(categ.catgegory)) {
-      console.log("ingreso a push", categ);
-      categoriesFil.push(categ);
+    if (!categoriesFil.length) {
+      categoriesFil.push(categ.category);
     }
-  } */
-
-/*  console.log("events", events);
-  let categoriesFut = [...new Set(events.category)];
-  console.log("categoriesFut", categoriesFut);
+    if (!categoriesFil.includes(categ.category)) {
+      categoriesFil.push(categ.category);
+    }
+  }
   /// events proximos
   let eventsFuturos = document.getElementById("eventsProx");
   let fragmentoProx = document.createDocumentFragment();
-  for (let event of events) {
+  let filtarPorCategoria = [];
+  for (let categoria of categoriesFil) {
+    ingresosTotales = 0;
+    porcentajeAsistencia = [];
+    filtarPorCategoria = events.filter((item) => item.category == categoria);
+    for (itemCalculado of filtarPorCategoria) {
+      ingresosTotales =
+        ingresosTotales + itemCalculado.estimate * itemCalculado.price;
+      porcentajeAsistencia.push(
+        (itemCalculado.estimate * 100) / itemCalculado.capacity
+      );
+    }
+    let sumaAsistencia = porcentajeAsistencia.reduce(function (
+      acumulador,
+      siguienteValor
+    ) {
+      return acumulador + siguienteValor;
+    });
+
     let trLinea = document.createElement("tr");
     let tdCatProx = document.createElement("td");
-    tdCatProx.textContent = event.category;
+    tdCatProx.textContent = categoria;
     let tdIngProx = document.createElement("td");
-    tdIngProx.textContent = event.category;
+    tdIngProx.textContent = "$ " + ingresosTotales.toLocaleString();
     let tdPorProx = document.createElement("td");
-    tdPorProx.textContent = event.category;
-
+    tdPorProx.textContent =
+      (sumaAsistencia / porcentajeAsistencia.length).toFixed(2) + " %";
     trLinea.appendChild(tdCatProx);
     trLinea.appendChild(tdIngProx);
     trLinea.appendChild(tdPorProx);
     fragmentoProx.appendChild(trLinea);
   }
   eventsFuturos.appendChild(fragmentoProx);
-}; */
+};
 
-/// events pasados
+const eventsPas = (events) => {
+  // filtro las categorias recibidas
+  let categoriesFil = [];
+  for (let categ of events) {
+    if (!categoriesFil.length) {
+      categoriesFil.push(categ.category);
+    }
+    if (!categoriesFil.includes(categ.category)) {
+      categoriesFil.push(categ.category);
+    }
+  }
+  /// events proximos
+  let eventsPasados = document.getElementById("eventsPast");
+  let fragmentoProx = document.createDocumentFragment();
+  let filtarPorCategoria = [];
+  for (let categoria of categoriesFil) {
+    ingresosTotales = 0;
+    porcentajeAsistencia = [];
+    filtarPorCategoria = events.filter((item) => item.category == categoria);
+    for (itemCalculado of filtarPorCategoria) {
+      ingresosTotales =
+        ingresosTotales + itemCalculado.assistance * itemCalculado.price;
+      porcentajeAsistencia.push(
+        (itemCalculado.assistance * 100) / itemCalculado.capacity
+      );
+    }
+    let sumaAsistencia = porcentajeAsistencia.reduce(function (
+      acumulador,
+      siguienteValor
+    ) {
+      return acumulador + siguienteValor;
+    });
 
-let eventsPasados = document.getElementById("eventsPast");
-
-let fragmentoPasados = document.createDocumentFragment();
-
-let tdCatPast = document.createElement("td");
-tdCatPast.textContent = "td Mayor Pasado";
-let tdIngPast = document.createElement("td");
-tdIngPast.textContent = "td Menor Pasado";
-let tdPorPast = document.createElement("td");
-tdPorPast.textContent = "td Mayor Aforo Pasado";
-
-fragmentoPasados.appendChild(tdCatPast);
-fragmentoPasados.appendChild(tdIngPast);
-fragmentoPasados.appendChild(tdPorPast);
-
-eventsPasados.appendChild(fragmentoPasados);
+    let trLinea = document.createElement("tr");
+    let tdCatProx = document.createElement("td");
+    tdCatProx.textContent = categoria;
+    let tdIngProx = document.createElement("td");
+    tdIngProx.textContent = "$ " + ingresosTotales.toLocaleString();
+    let tdPorProx = document.createElement("td");
+    tdPorProx.textContent =
+      (sumaAsistencia / porcentajeAsistencia.length).toFixed(2) + " %";
+    trLinea.appendChild(tdCatProx);
+    trLinea.appendChild(tdIngProx);
+    trLinea.appendChild(tdPorProx);
+    fragmentoProx.appendChild(trLinea);
+  }
+  eventsPasados.appendChild(fragmentoProx);
+};
 
 setTimeout(() => {
-  /* eventsFut(data.events); */
   eventsPre(data.events);
+  eventsFut(data.events.filter((event) => event.date >= data.currentDate));
+  eventsPas(data.events.filter((event) => event.date <= data.currentDate));
 }, 1000);
