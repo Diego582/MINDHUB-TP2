@@ -35,6 +35,8 @@ const eventsPre = (array) => {
 
   let fragmento = document.createDocumentFragment();
 
+  let trLinea = document.createElement("tr");
+
   let tdMayor = document.createElement("td");
   tdMayor.textContent = itemMayor.name;
   let tdMenor = document.createElement("td");
@@ -42,9 +44,11 @@ const eventsPre = (array) => {
   let tdMayorAforo = document.createElement("td");
   tdMayorAforo.textContent = itemMayorAforo.name;
 
-  fragmento.appendChild(tdMayor);
-  fragmento.appendChild(tdMenor);
-  fragmento.appendChild(tdMayorAforo);
+  trLinea.appendChild(tdMayor);
+  trLinea.appendChild(tdMenor);
+  trLinea.appendChild(tdMayorAforo);
+
+  fragmento.appendChild(trLinea);
 
   eventsPresentes.appendChild(fragmento);
 };
