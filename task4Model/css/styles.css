@@ -227,10 +227,8 @@ main {
   text-align: justify;
 }
 
-table td {
+td {
   height: 2em;
-  border-left: 1px solid gray;
-  border-right: 1px solid gray;
   text-align: center;
 }
 
@@ -311,6 +309,25 @@ table td {
   background-color: #733150ff;
 }
 
+.titulosTabla td {
+  background-color: #733150ff;
+  color: white !important;
+  font-weight: bold;
+}
+
+.table {
+  --bs-table-striped-bg: rgba(255, 28, 134, 0.15);
+}
+
+.tbody,
+td,
+tfoot,
+th,
+thead,
+tr {
+  border-color: rgba(115, 49, 80, 0.25);
+}
+
 @media only screen and (max-width: 375px) and (min-width: 319px) {
   .navbar-collapse {
     display: flex;
@@ -367,6 +384,11 @@ table td {
     flex-wrap: wrap;
     justify-content: center !important;
   }
+
+  table td {
+    font-size: x-small;
+  }
+
 }
 
 @media only screen and (max-width: 425px) and (min-width: 376px) {
@@ -414,6 +436,11 @@ table td {
     margin: 10px 0px;
     font-size: medium;
   }
+
+  table td {
+    font-size: small;
+  }
+
 }
 
 @media only screen and (max-width: 768px) and (min-width: 426px) {

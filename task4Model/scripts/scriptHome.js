@@ -45,13 +45,14 @@ const dibujarCards = (array) => {
 
 // se encarga de llamar al dibujo de cards y a su vez extrae los valores de las categorias
 const dibujarCardsInicial = (array) => {
-  dibujarCards(array);
+  categories = [];
   // extraer categorias para dibujar
   for (item of array) {
     if (!categories.includes(item.category)) {
       categories.push(item.category);
     }
   }
+  dibujarCards(array);
 };
 
 const dibujarCat = (array) => {
@@ -235,17 +236,16 @@ const handleSearch = (event) => {
   }
 };
 
+const handleOpenHome = () => {
+  cardSeleccionadas = [].concat(data.events);
+  dibujarCardsInicial(cardSeleccionadas, "cardsHome");
+  dibujarCat(categories);
+};
+
 // Aqui comienza la logica
 // se hace una copia inmutable del  array
-dataEvents();
+dataEvents("home");
 let cardSeleccionadas;
-if (!cardSeleccionadas) {
-  setTimeout(() => {
-    cardSeleccionadas = [].concat(data.events);
-    dibujarCardsInicial(cardSeleccionadas);
-    dibujarCat(categories);
-  }, 1000);
-}
 
 let categories = [];
 let cardsFiltradas = [];

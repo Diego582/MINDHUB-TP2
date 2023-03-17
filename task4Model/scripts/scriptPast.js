@@ -158,24 +158,22 @@ const buscarContenido = (array, consulta) => {
 };
 
 const handleFilterCategory = (event) => {
+  let valor = event.target.value;
   // en cada vuelta vaciar el arreglo cards filtrada
   cardsFiltradas = [];
   // ARMADO DEL FILTRO se condiciona el ingreso si no esta agrega el valor
 
-  if (!categoriesSelected.includes(event.target.value)) {
-    categoriesSelected.push(event.target.value);
+  if (!categoriesSelected.includes(valor)) {
+    categoriesSelected.push(valor);
   } else {
     // se condiciona el ingreso si ya esta se busca y se borra
-    categoriesSelected.splice(
-      categoriesSelected.indexOf(event.target.value),
-      1
-    );
+    categoriesSelected.splice(categoriesSelected.indexOf(valor), 1);
   }
 
   // si hay categoriesSelected hay filtro
   if (categoriesSelected.length) {
     // se realiza un foreach y se analiza cada instancia si es una categoria filtrada
-    data.events.forEach((element) => {
+    cardSeleccionadas.forEach((element) => {
       if (categoriesSelected.includes(element.category)) {
         cardsFiltradas.push(element);
       }
@@ -256,17 +254,17 @@ const handleSearch = (event) => {
   }
 };
 
-dataEvents();
-let cardSeleccionadas;
-setTimeout(() => {
-  console.log("data", data);
+const handleOpenPast = () => {
   cardSeleccionadas = data.events.filter(
     (event) => event.date < data.currentDate
   );
-  console.log("cardSeleccionadas", cardSeleccionadas);
+
   dibujarCardsInicial(cardSeleccionadas);
   dibujarCat(categories);
-}, 1000);
+};
+
+dataEvents("past");
+let cardSeleccionadas;
 
 // se hace una copia del array filtrando los events
 

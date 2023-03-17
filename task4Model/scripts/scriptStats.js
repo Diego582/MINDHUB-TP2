@@ -1,5 +1,3 @@
-dataEvents();
-
 const eventsPre = (array) => {
   let itemMayor;
   let itemMenor;
@@ -52,7 +50,6 @@ const eventsPre = (array) => {
 };
 
 const eventsFut = (events) => {
-  console.log("events en event Fut", events);
   // filtro las categorias recibidas
   let categoriesFil = [];
   for (let categ of events) {
@@ -150,8 +147,10 @@ const eventsPas = (events) => {
   eventsPasados.appendChild(fragmentoProx);
 };
 
-setTimeout(() => {
+const handleOpenStats = () => {
   eventsPre(data.events);
   eventsFut(data.events.filter((event) => event.date >= data.currentDate));
   eventsPas(data.events.filter((event) => event.date <= data.currentDate));
-}, 1000);
+};
+
+dataEvents("stats");

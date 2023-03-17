@@ -47,13 +47,14 @@ const dibujarCards = (array) => {
 
 // se encarga de llamar al dibujo de cards y a su vez extrae los valores de las categorias
 const dibujarCardsInicial = (array) => {
-  dibujarCards(array);
+  categories = [];
   // extraer categorias para dibujar
   for (item of array) {
     if (!categories.includes(item.category)) {
       categories.push(item.category);
     }
   }
+  dibujarCards(array);
 };
 
 const dibujarCat = (array) => {
@@ -133,25 +134,23 @@ const buscarContenido = (array, consulta) => {
   dibujarCards(cardSearch);
 };
 
-const handleFilterCategegory = (event) => {
+const handleFilterCategory = (event) => {
+  let valor = event.target.value;
   // en cada vuelta vaciar el arreglo cards filtrada
   cardsFiltradas = [];
   // ARMADO DEL FILTRO se condiciona el ingreso si no esta agrega el valor
 
-  if (!categoriesSelected.includes(event.target.value)) {
-    categoriesSelected.push(event.target.value);
+  if (!categoriesSelected.includes(valor)) {
+    categoriesSelected.push(valor);
   } else {
     // se condiciona el ingreso si ya esta se busca y se borra
-    categoriesSelected.splice(
-      categoriesSelected.indexOf(event.target.value),
-      1
-    );
+    categoriesSelected.splice(categoriesSelected.indexOf(valor), 1);
   }
 
   // si hay categoriesSelected hay filtro
   if (categoriesSelected.length) {
     // se realiza un foreach y se analiza cada instancia si es una categoria filtrada
-    data.events.forEach((element) => {
+    cardSeleccionadas.forEach((element) => {
       if (categoriesSelected.includes(element.category)) {
         cardsFiltradas.push(element);
       }
@@ -232,15 +231,17 @@ const handleSearch = (event) => {
   }
 };
 
-dataEvents();
-let cardSeleccionadas;
-setTimeout(() => {
+const handleOpenUpcoming = () => {
   cardSeleccionadas = data.events.filter(
     (event) => event.date > data.currentDate
   );
   dibujarCardsInicial(cardSeleccionadas);
   dibujarCat(categories);
-}, 1000);
+};
+
+dataEvents("upcoming");
+let cardSeleccionadas;
+
 // se hace una copia del array filtrando los events
 
 let categories = [];
@@ -259,7 +260,7 @@ const input = document.getElementById("inputSearch");
 const checkbox = document.getElementById("categoriesHome");
 
 // envio de los eventos de los check a la funcion
-checkbox.addEventListener("change", (event) => handleFilterCategegory(event));
+checkbox.addEventListener("change", (event) => handleFilterCategory(event));
 // envio los click de la lupa a la funcion
 aSearch.addEventListener("click", (event) => {
   handleSearchButton();
@@ -268,3 +269,5 @@ aSearch.addEventListener("click", (event) => {
 input.addEventListener("search", (event) => {
   handleSearch(event);
 });
+
+console.log();

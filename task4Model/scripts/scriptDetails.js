@@ -6,11 +6,10 @@ let fragmento = document.createDocumentFragment();
 
 let keyItem = [];
 let cardFiltrada;
-dataEvents();
-setTimeout(() => {
-  console.log("data", data.events);
+
+const handleOpenDetails = () => {
   cardDetail = data.events.find((item) => item._id == id);
-  console.log("cardDetail", cardDetail);
+
   if (cardDetail._id == id) {
     for (const key in cardDetail) {
       keyItem.push(key.toUpperCase());
@@ -141,4 +140,6 @@ setTimeout(() => {
     fragmento.appendChild(div2);
   }
   listCards.appendChild(fragmento);
-}, 1000);
+};
+
+dataEvents("details");
