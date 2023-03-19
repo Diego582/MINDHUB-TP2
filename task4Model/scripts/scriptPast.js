@@ -253,6 +253,11 @@ const handleSearch = (event) => {
     }
   }
 };
+const cargaCompleta = () => {
+  let contenedor = document.getElementById("cargando");
+  contenedor.style.visibility = "hidden";
+  contenedor.style.opacity = "0;";
+};
 
 const handleOpenPast = () => {
   cardSeleccionadas = data.events.filter(
@@ -261,6 +266,7 @@ const handleOpenPast = () => {
 
   dibujarCardsInicial(cardSeleccionadas);
   dibujarCat(categories);
+  cargaCompleta();
 };
 
 dataEvents("past");

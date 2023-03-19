@@ -7,6 +7,12 @@ let fragmento = document.createDocumentFragment();
 let keyItem = [];
 let cardFiltrada;
 
+const cargaCompleta = () => {
+  let contenedor = document.getElementById("cargando");
+  contenedor.style.visibility = "hidden";
+  contenedor.style.opacity = "0;";
+};
+
 const handleOpenDetails = () => {
   cardDetail = data.events.find((item) => item._id == id);
 
@@ -140,6 +146,7 @@ const handleOpenDetails = () => {
     fragmento.appendChild(div2);
   }
   listCards.appendChild(fragmento);
+  cargaCompleta();
 };
 
 dataEvents("details");

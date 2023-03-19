@@ -230,6 +230,11 @@ const handleSearch = (event) => {
     }
   }
 };
+const cargaCompleta = () => {
+  let contenedor = document.getElementById("cargando");
+  contenedor.style.visibility = "hidden";
+  contenedor.style.opacity = "0;";
+};
 
 const handleOpenUpcoming = () => {
   cardSeleccionadas = data.events.filter(
@@ -237,6 +242,7 @@ const handleOpenUpcoming = () => {
   );
   dibujarCardsInicial(cardSeleccionadas);
   dibujarCat(categories);
+  cargaCompleta();
 };
 
 dataEvents("upcoming");

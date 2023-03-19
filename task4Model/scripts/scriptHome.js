@@ -240,6 +240,7 @@ const handleOpenHome = () => {
   cardSeleccionadas = [].concat(data.events);
   dibujarCardsInicial(cardSeleccionadas, "cardsHome");
   dibujarCat(categories);
+  cargaCompleta();
 };
 
 // Aqui comienza la logica
@@ -259,6 +260,13 @@ let modalNuevo = null;
 let categoriesSelected = [];
 let buttonSearch = "";
 let cardSearch = [];
+
+const cargaCompleta = () => {
+  let contenedor = document.getElementById("cargando");
+  contenedor.style.visibility = "hidden";
+  contenedor.style.opacity = "0;";
+};
+
 const aSearch = document.getElementById("aSearch");
 const input = document.getElementById("inputSearch");
 const checkbox = document.getElementById("categoriesHome");

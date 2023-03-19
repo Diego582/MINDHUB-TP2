@@ -362,6 +362,7 @@ tr {
 
   .cardDetails {
     flex-direction: column;
+    align-content: center;
     flex-wrap: wrap;
     margin: 0;
     font-size: medium;
@@ -388,7 +389,6 @@ tr {
   table td {
     font-size: x-small;
   }
-
 }
 
 @media only screen and (max-width: 425px) and (min-width: 376px) {
@@ -423,6 +423,7 @@ tr {
 
   .cardDetails {
     flex-direction: column;
+    align-content: center;
     flex-wrap: wrap;
     margin: 0;
   }
@@ -440,7 +441,6 @@ tr {
   table td {
     font-size: small;
   }
-
 }
 
 @media only screen and (max-width: 768px) and (min-width: 426px) {
