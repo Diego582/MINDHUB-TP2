@@ -1,4 +1,4 @@
-let urlAPI = "https://mindhub-xj03.onrender.com/api/amazing";
+/* let urlAPI = "https://mindhub-xj03.onrender.com/api/amazing";
 var data = "";
 async function dataEvents(option) {
   await fetch(urlAPI)
@@ -17,3 +17,4 @@ async function dataEvents(option) {
     })
     .catch((e) => console.log(e));
 }
+ */

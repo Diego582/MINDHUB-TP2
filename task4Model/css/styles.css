@@ -328,6 +328,10 @@ tr {
   border-color: rgba(115, 49, 80, 0.25);
 }
 
+#cargando {
+  position: absolute;
+}
+
 @media only screen and (max-width: 375px) and (min-width: 319px) {
   .navbar-collapse {
     display: flex;
